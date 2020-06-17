@@ -1,0 +1,5 @@
+cache.capacity.gb=30
+hbase.zookeeper.quorum=slave001,slave002,slave003
+hbase.num.region=64
+hbase.use.hashed.key=true
+num.local.hbase.clients=12

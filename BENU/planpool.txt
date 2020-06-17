@@ -1,0 +1,432 @@
+**************************house*********************
+Final Optimal Execution Plan
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=3
+C4:=Intersect(A1) | >f1
+f4:=Foreach(C4)
+C2:=Intersect(A1) | ≠f4
+A4:=GetAdj(f4) | SIZE>=3
+T5:=Intersect(A1,A4)
+f2:=Foreach(C2)
+A2:=GetAdj(f2) | SIZE>=2
+T3:=Intersect(A2,A4) | SIZE>=2
+C3:=Intersect(T3) | ≠f1
+f3:=Foreach(C3)
+C5:=Intersect(T5) | ≠f2,≠f3
+f5:=Foreach(C5)
+f:=ReportMatch(f1,f2,f3,f4,f5)
+Final Optimal Execution Plan - Compression
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=3
+C4:=Intersect(A1) | >f1
+f4:=Foreach(C4)
+C2:=Intersect(A1) | ≠f4
+A4:=GetAdj(f4) | SIZE>=3
+T5:=Intersect(A1,A4)
+f2:=Foreach(C2)
+A2:=GetAdj(f2) | SIZE>=2
+T3:=Intersect(A2,A4) | SIZE>=2
+C3:=Intersect(T3) | ≠f1
+C5:=Intersect(T5) | ≠f2
+f:=ReportMatch(f1,f4,f2,C3,C5)
+
+*************************threetriangle*********************
+Final Optimal Execution Plan
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=4
+C3:=Intersect(A1)
+f3:=Foreach(C3)
+A3:=GetAdj(f3) | SIZE>=3
+T6:=TCache(f1,f3,A1,A3) | SIZE>=2
+C4:=Intersect(T6) | >f3
+f4:=Foreach(C4)
+C2:=Intersect(T6) | ≠f4
+A4:=GetAdj(f4) | SIZE>=3
+T5:=TCache(f1,f4,A1,A4) | SIZE>=2
+f2:=Foreach(C2)
+C5:=Intersect(T5) | ≠f2,≠f3
+f5:=Foreach(C5)
+f:=ReportMatch(f1,f2,f3,f4,f5)
+Final Optimal Execution Plan - Compression
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=4
+C3:=Intersect(A1)
+f3:=Foreach(C3)
+A3:=GetAdj(f3) | SIZE>=3
+T6:=TCache(f1,f3,A1,A3) | SIZE>=2
+C4:=Intersect(T6) | >f3
+f4:=Foreach(C4)
+C2:=Intersect(T6) | ≠f4
+A4:=GetAdj(f4) | SIZE>=3
+T5:=TCache(f1,f4,A1,A4) | SIZE>=2
+C5:=Intersect(T5) | ≠f3
+f:=ReportMatch(f1,f3,f4,C2,C5)
+
+*************************solarsquare*********************
+Final Optimal Execution Plan
+---------------------------------------------------
+f5:=Init(start)
+A5:=GetAdj(f5) | SIZE>=4
+C1:=Intersect(A5)
+f1:=Foreach(C1)
+C3:=Intersect(A5) | >f1
+A1:=GetAdj(f1) | SIZE>=3
+T7:=Intersect(A5,A1) | SIZE>=2
+f3:=Foreach(C3)
+A3:=GetAdj(f3) | SIZE>=3
+T6:=Intersect(T7,A3) | SIZE>=2
+C2:=Intersect(T6) | >f1
+f2:=Foreach(C2)
+C4:=Intersect(T6) | >f2
+f4:=Foreach(C4)
+f:=ReportMatch(f1,f2,f3,f4,f5)
+Final Optimal Execution Plan - Compression
+---------------------------------------------------
+f5:=Init(start)
+A5:=GetAdj(f5) | SIZE>=4
+C1:=Intersect(A5)
+f1:=Foreach(C1)
+C3:=Intersect(A5) | >f1
+A1:=GetAdj(f1) | SIZE>=3
+T7:=Intersect(A5,A1) | SIZE>=2
+f3:=Foreach(C3)
+A3:=GetAdj(f3) | SIZE>=3
+T6:=Intersect(T7,A3) | SIZE>=2
+C2:=Intersect(T6) | >f1
+C4:=Intersect(T6) | >f1
+f:=ReportMatch(f5,f1,f3,C2,C4)
+
+*************************near5clique*********************
+Final Optimal Execution Plan
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=4
+C4:=Intersect(A1) | >f1
+f4:=Foreach(C4)
+A4:=GetAdj(f4) | SIZE>=4
+T6:=Intersect(A1,A4) | SIZE>=3
+C2:=Intersect(T6)
+f2:=Foreach(C2)
+C5:=Intersect(T6) | ≠f2
+A2:=GetAdj(f2) | SIZE>=3
+T3:=Intersect(A2,T6)
+f5:=Foreach(C5)
+C3:=Intersect(T3) | >f2,≠f5
+f3:=Foreach(C3)
+f:=ReportMatch(f1,f2,f3,f4,f5)
+Final Optimal Execution Plan - Compression
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=4
+C4:=Intersect(A1) | >f1
+f4:=Foreach(C4)
+A4:=GetAdj(f4) | SIZE>=4
+T6:=Intersect(A1,A4) | SIZE>=3
+C2:=Intersect(T6)
+f2:=Foreach(C2)
+C5:=Intersect(T6) | ≠f2
+A2:=GetAdj(f2) | SIZE>=3
+T3:=Intersect(A2,T6)
+C3:=Intersect(T3) | >f2
+f:=ReportMatch(f1,f4,f2,C5,C3)
+
+*************************quadtriangle*********************
+Final Optimal Execution Plan
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=5
+C3:=Intersect(A1)
+f3:=Foreach(C3)
+C5:=Intersect(A1) | >f3
+A3:=GetAdj(f3) | SIZE>=3
+T7:=TCache(f1,f3,A1,A3) | SIZE>=2
+f5:=Foreach(C5)
+C2:=Intersect(T7) | ≠f5
+A5:=GetAdj(f5) | SIZE>=3
+T6:=TCache(f1,f5,A1,A5) | SIZE>=2
+T4:=Intersect(T7,A5)
+f2:=Foreach(C2)
+C6:=Intersect(T6) | ≠f2,≠f3
+f6:=Foreach(C6)
+C4:=Intersect(T4) | ≠f2,≠f6
+f4:=Foreach(C4)
+f:=ReportMatch(f1,f2,f3,f4,f5,f6)
+Final Optimal Execution Plan - Compression
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=5
+C3:=Intersect(A1)
+f3:=Foreach(C3)
+C5:=Intersect(A1) | >f3
+A3:=GetAdj(f3) | SIZE>=3
+T7:=TCache(f1,f3,A1,A3) | SIZE>=2
+f5:=Foreach(C5)
+C2:=Intersect(T7) | ≠f5
+A5:=GetAdj(f5) | SIZE>=3
+T6:=TCache(f1,f5,A1,A5) | SIZE>=2
+T4:=Intersect(T7,A5)
+C6:=Intersect(T6) | ≠f3
+C4:=Intersect(T4)
+f:=ReportMatch(f1,f3,f5,C2,C6,C4)
+
+*************************trianglecore*********************
+Final Optimal Execution Plan
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=4
+C3:=Intersect(A1) | >f1
+f3:=Foreach(C3)
+A3:=GetAdj(f3) | SIZE>=4
+T7:=TCache(f1,f3,A1,A3) | SIZE>=2
+C5:=Intersect(T7) | >f3
+f5:=Foreach(C5)
+C2:=Intersect(T7) | ≠f5
+A5:=GetAdj(f5) | SIZE>=4
+T4:=Intersect(A3,A5) | SIZE>=2
+T6:=TCache(f1,f5,A1,A5) | SIZE>=2
+f2:=Foreach(C2)
+C4:=Intersect(T4) | ≠f1,≠f2
+f4:=Foreach(C4)
+C6:=Intersect(T6) | ≠f2,≠f3,≠f4
+f6:=Foreach(C6)
+f:=ReportMatch(f1,f2,f3,f4,f5,f6)
+Final Optimal Execution Plan - Compression
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=4
+C3:=Intersect(A1) | >f1
+f3:=Foreach(C3)
+A3:=GetAdj(f3) | SIZE>=4
+T7:=TCache(f1,f3,A1,A3) | SIZE>=2
+C5:=Intersect(T7) | >f3
+f5:=Foreach(C5)
+C2:=Intersect(T7) | ≠f5
+A5:=GetAdj(f5) | SIZE>=4
+T4:=Intersect(A3,A5) | SIZE>=2
+T6:=TCache(f1,f5,A1,A5) | SIZE>=2
+C4:=Intersect(T4) | ≠f1
+C6:=Intersect(T6) | ≠f3
+f:=ReportMatch(f1,f3,f5,C2,C4,C6)
+
+*************************twincsquare*********************
+Final Optimal Execution Plan
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=4
+C4:=Intersect(A1) | >f1
+f4:=Foreach(C4)
+A4:=GetAdj(f4) | SIZE>=4
+T7:=TCache(f1,f4,A1,A4) | SIZE>=2
+C2:=Intersect(T7)
+f2:=Foreach(C2)
+C5:=Intersect(T7) | ≠f2
+A2:=GetAdj(f2) | SIZE>=3
+T3:=Intersect(A2,A4) | SIZE>=2
+f5:=Foreach(C5)
+C3:=Intersect(T3) | ≠f1,≠f5
+A5:=GetAdj(f5) | SIZE>=3
+T6:=TCache(f1,f5,A1,A5) | SIZE>=2
+f3:=Foreach(C3)
+C6:=Intersect(T6) | ≠f2,≠f3,≠f4
+f6:=Foreach(C6)
+f:=ReportMatch(f1,f2,f3,f4,f5,f6)
+Final Optimal Execution Plan - Compression
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=4
+C4:=Intersect(A1) | >f1
+f4:=Foreach(C4)
+A4:=GetAdj(f4) | SIZE>=4
+T7:=TCache(f1,f4,A1,A4) | SIZE>=2
+C2:=Intersect(T7)
+f2:=Foreach(C2)
+C5:=Intersect(T7) | ≠f2
+A2:=GetAdj(f2) | SIZE>=3
+T3:=Intersect(A2,A4) | SIZE>=2
+f5:=Foreach(C5)
+C3:=Intersect(T3) | ≠f1,≠f5
+A5:=GetAdj(f5) | SIZE>=3
+T6:=TCache(f1,f5,A1,A5) | SIZE>=2
+C6:=Intersect(T6) | ≠f2,≠f4
+f:=ReportMatch(f1,f4,f2,f5,C3,C6)
+
+*************************twinclique4*********************
+Final Optimal Execution Plan
+---------------------------------------------------
+f3:=Init(start)
+A3:=GetAdj(f3) | SIZE>=5
+C6:=Intersect(A3) | >f3
+f6:=Foreach(C6)
+A6:=GetAdj(f6) | SIZE>=5
+T7:=Intersect(A3,A6) | SIZE>=4
+C1:=Intersect(T7)
+f1:=Foreach(C1)
+C4:=Intersect(T7) | >f1
+A1:=GetAdj(f1) | SIZE>=3
+T2:=Intersect(A1,T7)
+f4:=Foreach(C4)
+C2:=Intersect(T2) | >f1,≠f4
+A4:=GetAdj(f4) | SIZE>=3
+T5:=Intersect(A4,T7)
+f2:=Foreach(C2)
+C5:=Intersect(T5) | >f4,≠f2
+f5:=Foreach(C5)
+f:=ReportMatch(f1,f2,f3,f4,f5,f6)
+Final Optimal Execution Plan - Compression
+---------------------------------------------------
+f3:=Init(start)
+A3:=GetAdj(f3) | SIZE>=5
+C6:=Intersect(A3) | >f3
+f6:=Foreach(C6)
+A6:=GetAdj(f6) | SIZE>=5
+T7:=Intersect(A3,A6) | SIZE>=4
+C1:=Intersect(T7)
+f1:=Foreach(C1)
+C4:=Intersect(T7) | >f1
+A1:=GetAdj(f1) | SIZE>=3
+T2:=Intersect(A1,T7)
+f4:=Foreach(C4)
+C2:=Intersect(T2) | >f1,≠f4
+A4:=GetAdj(f4) | SIZE>=3
+T5:=Intersect(A4,T7)
+C5:=Intersect(T5) | >f4
+f:=ReportMatch(f3,f6,f1,f4,C2,C5)
+
+*************************starofdavidplus*********************
+Final Optimal Execution Plan
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=5
+C4:=Intersect(A1) | >f1
+f4:=Foreach(C4)
+A4:=GetAdj(f4) | SIZE>=5
+T8:=Intersect(A1,A4) | SIZE>=4
+C2:=Intersect(T8)
+f2:=Foreach(C2)
+C5:=Intersect(T8) | >f2
+A2:=GetAdj(f2) | SIZE>=4
+T9:=Intersect(T8,A2) | SIZE>=2
+f5:=Foreach(C5)
+A5:=GetAdj(f5) | SIZE>=4
+T7:=Intersect(T9,A5) | SIZE>=2
+C3:=Intersect(T7) | >f2
+f3:=Foreach(C3)
+C6:=Intersect(T7) | >f3
+f6:=Foreach(C6)
+f:=ReportMatch(f1,f2,f3,f4,f5,f6)
+Final Optimal Execution Plan - Compression
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=5
+C4:=Intersect(A1) | >f1
+f4:=Foreach(C4)
+A4:=GetAdj(f4) | SIZE>=5
+T8:=Intersect(A1,A4) | SIZE>=4
+C2:=Intersect(T8)
+f2:=Foreach(C2)
+C5:=Intersect(T8) | >f2
+A2:=GetAdj(f2) | SIZE>=4
+T9:=Intersect(T8,A2) | SIZE>=2
+f5:=Foreach(C5)
+A5:=GetAdj(f5) | SIZE>=4
+T7:=Intersect(T9,A5) | SIZE>=2
+C3:=Intersect(T7) | >f2
+C6:=Intersect(T7) | >f2
+f:=ReportMatch(f1,f4,f2,f5,C3,C6)
+
+*************************triangle*********************
+Final Optimal Execution Plan
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=2
+C2:=Intersect(A1) | >f1
+f2:=Foreach(C2)
+A2:=GetAdj(f2) | SIZE>=2
+T3:=Intersect(A1,A2)
+C3:=Intersect(T3) | >f2
+f3:=Foreach(C3)
+f:=ReportMatch(f1,f2,f3)
+Final Optimal Execution Plan - Compression
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=2
+C2:=Intersect(A1) | >f1
+f2:=Foreach(C2)
+A2:=GetAdj(f2) | SIZE>=2
+T3:=Intersect(A1,A2)
+C3:=Intersect(T3) | >f2
+f:=ReportMatch(f1,f2,C3)
+
+*************************clique4*********************
+Final Optimal Execution Plan
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=3
+C2:=Intersect(A1) | >f1
+f2:=Foreach(C2)
+A2:=GetAdj(f2) | SIZE>=3
+T5:=Intersect(A1,A2) | SIZE>=2
+C3:=Intersect(T5) | >f2
+f3:=Foreach(C3)
+A3:=GetAdj(f3) | SIZE>=3
+T4:=Intersect(T5,A3)
+C4:=Intersect(T4) | >f3
+f4:=Foreach(C4)
+f:=ReportMatch(f1,f2,f3,f4)
+Final Optimal Execution Plan - Compression
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=3
+C2:=Intersect(A1) | >f1
+f2:=Foreach(C2)
+A2:=GetAdj(f2) | SIZE>=3
+T5:=Intersect(A1,A2) | SIZE>=2
+C3:=Intersect(T5) | >f2
+f3:=Foreach(C3)
+A3:=GetAdj(f3) | SIZE>=3
+T4:=Intersect(T5,A3)
+C4:=Intersect(T4) | >f3
+f:=ReportMatch(f1,f2,f3,C4)
+
+*************************clique5*********************
+Final Optimal Execution Plan
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=4
+C2:=Intersect(A1) | >f1
+f2:=Foreach(C2)
+A2:=GetAdj(f2) | SIZE>=4
+T7:=Intersect(A1,A2) | SIZE>=3
+C3:=Intersect(T7) | >f2
+f3:=Foreach(C3)
+A3:=GetAdj(f3) | SIZE>=4
+T6:=Intersect(A3,T7) | SIZE>=2
+C4:=Intersect(T6) | >f3
+f4:=Foreach(C4)
+A4:=GetAdj(f4) | SIZE>=4
+T5:=Intersect(T6,A4)
+C5:=Intersect(T5) | >f4
+f5:=Foreach(C5)
+f:=ReportMatch(f1,f2,f3,f4,f5)
+Final Optimal Execution Plan - Compression
+---------------------------------------------------
+f1:=Init(start)
+A1:=GetAdj(f1) | SIZE>=4
+C2:=Intersect(A1) | >f1
+f2:=Foreach(C2)
+A2:=GetAdj(f2) | SIZE>=4
+T7:=Intersect(A1,A2) | SIZE>=3
+C3:=Intersect(T7) | >f2
+f3:=Foreach(C3)
+A3:=GetAdj(f3) | SIZE>=4
+T6:=Intersect(A3,T7) | SIZE>=2
+C4:=Intersect(T6) | >f3
+f4:=Foreach(C4)
+A4:=GetAdj(f4) | SIZE>=4
+T5:=Intersect(T6,A4)
+C5:=Intersect(T5) | >f4
+f:=ReportMatch(f1,f2,f3,f4,C5)

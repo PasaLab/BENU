@@ -1,0 +1,8 @@
+f1:=Init(start)
+ADO1:=GetAdj(f1,delta,out)
+f3,op:=Foreach(ADO1)
+AEO1:=GetAdj(f1,either,out,op)
+AUI3:=GetAdj(f3,unaltered,in,op)
+T2:=Intersect(AEO1,AUI3)
+f2:=Foreach(T2)
+f:=ReportMatch(f1,f2,f3)

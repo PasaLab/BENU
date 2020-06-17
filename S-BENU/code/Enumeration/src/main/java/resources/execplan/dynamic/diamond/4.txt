@@ -1,0 +1,12 @@
+f4:=Init(start)
+ADO4:=GetAdj(f4,delta,out)
+f3,op:=Foreach(ADO4)
+AEO4:=GetAdj(f4,either,out,op)
+C1:=Intersect(AEO4) | !f3
+AEI3:=GetAdj(f3,either,in,op)
+f1:=Foreach(C1)
+AEO1:=GetAdj(f1,either,out,op)
+T2:=Intersect(AEO1,AEI3)
+C2:=Intersect(T2) | !f4
+f2:=Foreach(C2)
+f:=ReportMatch(f1,f2,f3,f4)

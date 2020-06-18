@@ -111,10 +111,10 @@ num.local.hbase.clients=12
 
 We provide a script file `run_query_spark.sh` to run the program. This script accepts five parameters: the outgoing adjacency list directory in HDFS for the initial data graph, the incoming adjacency list directory in HDFS for the initial data graph, the incremental execution plans directory, the update edges directory in HDFS, and total time step. 
 
-We provide incremental execution plans for 5 pattern graphs in Fig.1 in `plan` directory. To enumerating all positive and negative subgraphs for the pattern graph `triangle` within time step 10, run the following command:
+We provide incremental execution plans for 5 pattern graphs in Fig.1 in `plans` directory. To enumerating all positive and negative subgraphs for the pattern graph `triangle` within time step 10, run the following command:
 
 ```
-./run_query_spark.sh outgoing_adjacency_list_hdfs_dir incoming_adjacency_list_hdfs_dir plan/triangle update_edges_hdfs_dir 10 
+./run_query_spark.sh outgoing_adjacency_list_hdfs_dir incoming_adjacency_list_hdfs_dir plans/triangle update_edges_hdfs_dir 10 
 ```
 
 ![PatternGraphs](figures/PatternGraphs.png)
@@ -215,7 +215,7 @@ Final Optimal Execution Plan
 ---------------------------------------------------
 f1:=Init(start)
 ADO1:=GetAdj(f1,delta,out)
-f2,op:=Foreach(ADO1)
+op,f2:=Foreach(ADO1)
 AUO1:=GetAdj(f1,unaltered,out,op)
 AUO2:=GetAdj(f2,unaltered,out,op)
 T3:=Intersect(AUO1,AUO2)
@@ -227,7 +227,7 @@ Final Optimal Execution Plan
 ---------------------------------------------------
 f1:=Init(start)
 ADO1:=GetAdj(f1,delta,out)
-f3,op:=Foreach(ADO1)
+op,f3:=Foreach(ADO1)
 AEO1:=GetAdj(f1,either,out,op)
 AUI3:=GetAdj(f3,unaltered,in,op)
 T2:=Intersect(AEO1,AUI3)
@@ -239,7 +239,7 @@ Final Optimal Execution Plan
 ---------------------------------------------------
 f2:=Init(start)
 ADO2:=GetAdj(f2,delta,out)
-f3,op:=Foreach(ADO2)
+op,f3:=Foreach(ADO2)
 AEI2:=GetAdj(f2,either,in,op)
 AEI3:=GetAdj(f3,either,in,op)
 T1:=Intersect(AEI2,AEI3)

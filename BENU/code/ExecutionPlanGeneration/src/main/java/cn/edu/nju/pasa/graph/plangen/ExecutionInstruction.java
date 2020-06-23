@@ -9,8 +9,8 @@ public class ExecutionInstruction {
     private String targetVariable;
     private String singleOperator = "";
     private List<String> multiOperators = new ArrayList<String>();
-    private List<Integer> automorphismBreakingConds = new ArrayList<Integer>();
-    private List<Integer> injectiveConds = new ArrayList<>();
+    private List<Integer> automorphismBreakingConds = new ArrayList<Integer>(); // the condition >2,<1 is stored as [2,-1]
+    private List<Integer> injectiveConds = new ArrayList<>(); // the condition ≠1,≠2 is stored as [1,2]
     private int degreeCondition = -1;
     private int sizeCondition = -1;
     private List<String> dependOn = new ArrayList<String>();

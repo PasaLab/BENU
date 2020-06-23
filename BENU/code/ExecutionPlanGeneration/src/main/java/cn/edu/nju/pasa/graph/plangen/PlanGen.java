@@ -397,6 +397,7 @@ public class PlanGen {
 
         computeExecutionPlanDependencies(execPlan);
         removeUnusedDBQInstructions(execPlan);
+        eliminationUniOperand(execPlan);
 
         return execPlan;
     }
@@ -721,6 +722,17 @@ public class PlanGen {
         }
 
         // 5. remove single operator intersect instruction without any filter condition. X=Intersect(Y)
+        eliminationUniOperand(execPlan);
+
+        if (ConstantCharacter.DEBUG) {
+            System.out.println("**************eliminate***************");
+            for (ExecutionInstruction instruction : execPlan) {
+                System.out.println(instruction);
+            }
+        }
+    }
+
+    private void eliminationUniOperand(List<ExecutionInstruction> execPlan) {
         Iterator listIter = execPlan.iterator();
         Map<String, String> record = new HashMap<String, String>();
         while (listIter.hasNext()) {
@@ -729,34 +741,31 @@ public class PlanGen {
                     instruction.getType() != ExecutionInstruction.InstructionType.RES) {
                 if (instruction.getType() == ExecutionInstruction.InstructionType.INT &&
                         instruction.isSingleOperator() &&
-                        instruction.getTargetVariable().startsWith(ConstantCharacter.INTTARGET)) {
-                    record.put(instruction.getTargetVariable(), instruction.getSingleOperator());
-                    listIter.remove();
-                } else {
-                    if (instruction.isSingleOperator()) {
-                        if (record.containsKey(instruction.getSingleOperator())) {
-                            instruction.setSingleOperator(record.get(instruction.getSingleOperator()));
-                        }
-                    } else {
-                        ArrayList<String> tempOps = new ArrayList<String>();
-                        tempOps.addAll(instruction.getMultiOperators());
-                        for (String op : tempOps) {
-                            if (record.containsKey(op)) {
-                                tempOps.add(record.get(op));
-                                tempOps.remove(op);
-                            }
-                        }
-                        instruction.setMultiOperators(tempOps);
+                        instruction.getInjectiveConds().isEmpty() &&
+                        instruction.getAutomorphismBreakingConds().isEmpty()) {
+                    if(!ConstantCharacter.COMPRESS || instruction.getTargetVariable().startsWith(ConstantCharacter.INTTARGET)) {
+                        // if ConstantCharacter.COMPRESS=true, Cx:=Intersect(X) will not be removed
+                        record.put(instruction.getTargetVariable(), instruction.getSingleOperator());
+                        listIter.remove();
+                        continue;
                     }
-
                 }
-            }
-        }
-
-        if (ConstantCharacter.DEBUG) {
-            System.out.println("**************eliminate***************");
-            for (ExecutionInstruction instruction : execPlan) {
-                System.out.println(instruction);
+                // replace operand that corresponding instruction has been removed
+                if (instruction.isSingleOperator()) {
+                    if (record.containsKey(instruction.getSingleOperator())) {
+                        instruction.setSingleOperator(record.get(instruction.getSingleOperator()));
+                    }
+                } else {
+                    ArrayList<String> tempOps = new ArrayList<String>();
+                    tempOps.addAll(instruction.getMultiOperators());
+                    for (String op : tempOps) {
+                        if (record.containsKey(op)) {
+                            tempOps.add(record.get(op));
+                            tempOps.remove(op);
+                        }
+                    }
+                    instruction.setMultiOperators(tempOps);
+                }
             }
         }
     }

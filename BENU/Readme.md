@@ -192,7 +192,7 @@ src_vid neighbor_vid_1 neighbor_vid_2 ... neighbor_vid_n
 
 You can replace it with any other data graph. Note that different data graphs may generate different execution plans due to the degree distribution. 
 
-In the experiments in the ICDE paper, we use the provided test_datagraph to generate the execution plans for all the data graphs.
+In the experiments in the ICDE paper, we use the provided test_datagraph to generate the execution plans for all the pattern graphs.
 
 ### Pattern graph
 

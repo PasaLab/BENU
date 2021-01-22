@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package cn.edu.nju.pasa.graph.analysis.subgraph.util;
+
+service ReportStatus {
+  rpc StatusReport (Report) returns (Empty) {}
+  rpc GetClusterStatus(Empty) returns (ClusterStatus) {}
+}
+
+message Report {
+  string host = 1;
+  int32 isBusy = 2;
+}
+
+message ClusterStatus {
+  int32 numIdleNode = 1;
+  int32 numTotalNode = 2;
+}
+
+message Empty {
+}
+

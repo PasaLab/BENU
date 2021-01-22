@@ -43,7 +43,7 @@ We have already provided two jar files in the current directory.
 
 ## Continuous Subgraph Enumeration
 
-### Prepare Initial Data Graph 
+### Prepare Initial Data Graph
 
 The initial data graph files include two files: the outgoing adjacency list file and the incoming adjacency list file.
 
@@ -77,7 +77,7 @@ Assume there are $t(t\ge1)$ time steps, there should be *t* update edges files. 
 
 The update edges files should be stored in a directory on HDFS in advance.
 
-**Notice**: 
+**Notice**:
 
 We assume that an edge is either inserted or deleted in each update edges file. The inserted edges in each update edges file $\Delta o_t$ must exist at time step t-1, and the deleted edges in each update edges file $\Delta o_t$ must not exist at time step t-1.
 
@@ -87,7 +87,7 @@ The program requires a connection file for HBase. We provide a default configura
 
 A demo file is shown below:
 
-```
+```plain
 cache.capacity.gb=30
 hbase.zookeeper.quorum=slave001,slave002,slave003
 hbase.num.region=64
@@ -101,7 +101,7 @@ num.local.hbase.clients=12
 4. `hbase.use.hashed.key`, should always be `true` to guarantee the load balance.
 5. `num.local.hbase.clients`, the number of local hbase clients. Recommend: number of cores in each computing node.
 
-**Notice**: 
+**Notice**:
 
 - The cores in each computing node mentioned above means the **hardware cores** in each node. If the OS reports the node having 24 cores under the hyperthreading technique, it only has 12 hardware cores.
 
@@ -123,7 +123,7 @@ We provide incremental execution plans for 5 pattern graphs in Fig.1 in `plans` 
 
 **Notice**: Assume the total time step is *t*, the number of files in the update edges directory is *n*. if $t\le n$,  the program will run *t* time steps, otherwise, the program will only run *n* time steps.
 
-This script gives several default configurations used in the program. The key configurations that need to be modified according to your environment are: 
+This script gives several default configurations used in the program. The key configurations that need to be modified according to your environment are:
 
 - `master`: specifies the master URL for a distributed cluster, or `local` to run locally with one thread, or `local[N]` to run locally with N threads. We  run the program on [Hadoop YARN](<https://spark.apache.org/docs/latest/running-on-yarn.html>).
 - `driver-memory`: recommend to use all the available memory of each node after reserving memory for HDFS and HBase. 
@@ -158,6 +158,12 @@ Timestamp 1 consumes 6.10 seconds to process.
 ---------------- Timestamp 2----------------
 ...
 ```
+
+### Code on Two-step Load Balancing Technique
+
+The code related to the two-step load balancing technique is avaialbe in two files:
+- Two-step load balancing workflow: `enumerate` method of `code/Enumeration/spark-enumerator/src/main/java/cn/edu/nju/pasa/graph/analysis/subgraph/DynamicSubgraphEnumerationGeneric2.java`.
+- Task splitting for a local search task: `splitOnCurrentENUInstruction` method of `code/Enumeration/spark-enumerator/src/main/java/cn/edu/nju/pasa/graph/analysis/subgraph/dynamic/LocalSearchSubTask.java`.
 
 ## Execution Plan Generation
 

@@ -19,14 +19,15 @@ hdfs dfs -rmr $OUTPUT_FILE/*
 
 echo "----------START: " `date` "----------"
 
-JAR=./SubgraphEnumeration-1-allinone.jar
-CLASS=cn.edu.nju.pasa.graph.analysis.subgraph.DynamicSubgraphEnumerationGeneric
+JAR=./spark-enumerator-opt4-allinone.jar
+CLASS=cn.edu.nju.pasa.graph.analysis.subgraph.DynamicSubgraphEnumerationGeneric2
+TASK_STAT_FILE=null
 
 spark-submit --master yarn \
              --driver-memory 40g \
              --executor-memory 40g \
              --num-executors 16 \
-             --executor-cores 24 \
+             --executor-cores 2 \
              --conf spark.locality.wait=0s \
              --conf spark.sql.shuffle.partitions=$PARTITION_NUM \
              --conf spark.executor.extraJavaOptions="-XX:+PrintGCDetails -ea -XX:+PrintGCDateStamps" \
@@ -38,11 +39,14 @@ spark-submit --master yarn \
              update.edges.path=$UPDATES_EDGES_FILE \
              update.edges.batch=$BATCH \
              partition.num=$PARTITION_NUM \
+             num.working.threads=12 \
              blocking.queue.size=1000 \
              output.path=$OUTPUT_FILE \
              incremental.execution.plans.path=$INCREMENTAL_EXEC_PLANS_PATH \
              enable.load.balance=false \
-             load.balance.threshold=50
+             enable.adaptive.balance.threshold=true \
+             num.split.internode=32 \
+             task.stats.output.path=$TASK_STAT_FILE
 retcode=$?
 echo "----------END: " `date` "----------"
 echo "Exit value: " $retcode
